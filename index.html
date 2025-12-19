@@ -1,335 +1,303 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HR Paper Mill</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>HR Paper Mill - ระบบบันทึกการขาย</title>
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#0d6efd"> <meta name="description" content="ระบบบันทึกการขายและส่งหลักฐานการทำงาน โครงการใช้สิทธิ์สัมปทานผู้พิการตามมาตรา 35">
+  <meta name="author" content="TUBE Creative Group">
+  <meta name="keywords" content="HR, Paper Mill, Sales, Reporting, มาตรา 35, ผู้พิการ">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/LineSeedSansTH/LineSeedSansTH.css">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourusername.github.io/hr-paper-mill/"> <meta property="og:title" content="HR Paper Mill - Sales System">
+  <meta property="og:description" content="ระบบส่งงานและบันทึกข้อมูลการขาย สำหรับผู้ใช้สิทธิ์มาตรา 35">
+  <meta property="og:image" content="logo-share.png"> <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="HR Paper Mill - Sales System">
+  <meta property="twitter:description" content="ระบบส่งงานและบันทึกข้อมูลการขาย สำหรับผู้ใช้สิทธิ์มาตรา 35">
+  <meta property="twitter:image" content="logo-share.png">
 
-    <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/LineSeedSansTH/LineSeedSansTH.css">
+  
+  <link rel="stylesheet" href="css/style.css"> 
 </head>
-
 <body>
 
-    <div id="loading" class="loading-overlay">
-        <div class="spinner-border text-primary" role="status"></div>
-        <span class="ms-3 text-primary fw-bold">กำลังประมวลผล...</span>
+  <div id="loading" class="loading-overlay">
+    <div class="spinner-border text-primary" role="status"></div>
+    <span class="ms-3 text-primary fw-bold">กำลังประมวลผล...</span>
+  </div>
+
+  <div class="modal fade" id="rulesModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content" style="border-radius: 20px;">
+        <div class="modal-header bg-warning bg-opacity-10" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
+          <h5 class="modal-title text-dark fw-bold" style="font-size: 1.1rem;"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i> ข้อปฏิบัติในการใช้สิทธิ์มาตรา 35</h5>
+        </div>
+        <div class="modal-body rules-content p-4">
+           <h6 class="fw-bold mb-3">ประเภทการจัดสถานที่จำหน่ายสินค้าหรือบริการ</h6>
+           <ol>
+             <li>ผู้ใช้สิทธิ์ ต้องส่งข้อมูลเข้าห้องรายงาน ใน Application WIX... (รายละเอียดเต็ม)
+               <ul>
+                 <li>1.1 ต้องถ่ายรูปให้เห็นบัตรประจำร้านค้าผู้พิการ ล็อคที่ขาย และผู้ที่ขาย</li>
+                 <li>1.2 หากวันไหนไม่มาขาย ต้องแจ้งเหตุผลของการหยุดขาย และแจ้งกำหนดว่าจะหยุดขายกี่วัน</li>
+                 <li>1.3 หากวันไหนให้ผู้อื่นเข้ามาขาย แจ้งเหตุผลของ และแจ้งว่าเป็นใครเข้ามาขายทดแทน</li>
+               </ul>
+             </li>
+             <li>หากผู้พิการ เสียชีวิตลง... <strong>หากไม่ปฏิบัติตามผู้ดูแลต้องชดใช้...</strong></li>
+             <li>หากได้ลงนามสัญญา... <strong>หากมีการใช้สิทธิ์ผู้พิการซ้ำซ้อน...</strong></li>
+             <li>หากต้องการเปลี่ยนประเภทสินค้า... ติดต่อ คุณเต้ หรือ คุณอู๋</li>
+             <li>ผู้ใช้สิทธิ์ ต้องไม่ให้ผู้อื่นใช้สถานที่แทน... <strong>หากไม่ปฏิบัติตาม...</strong></li>
+             <li>ผู้ใช้สิทธิ์ต้องประกอบกิจการใดๆ ที่ไม่ผิดกฎหมาย... <strong>หากไม่ปฏิบัติตาม...</strong></li>
+           </ol>
+        </div>
+        <div class="modal-footer border-0 pt-0 pb-4 px-4">
+          <button type="button" class="btn btn-primary w-100 rounded-pill py-2 fw-bold" data-bs-dismiss="modal">รับทราบและดำเนินการต่อ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="aboutModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border-radius: 20px; padding: 20px;">
+        <button type="button" class="btn-close position-absolute end-0 top-0 m-3" data-bs-dismiss="modal"></button>
+        <div class="modal-body text-center">
+           <div class="info-modal-icon bg-primary"><i class="bi bi-info-circle"></i></div>
+           <h4 class="info-modal-title">เกี่ยวกับระบบ</h4>
+           <p>ระบบ HR Paper Mill พัฒนาขึ้นเพื่ออำนวยความสะดวกในการส่งหลักฐานการขายและติดตามผลการดำเนินงานของผู้ใช้สิทธิ์ตามมาตรา 35</p>
+           <p class="text-muted small mt-3">Version 2.6 (2026)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="howtoModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border-radius: 20px; padding: 20px;">
+        <button type="button" class="btn-close position-absolute end-0 top-0 m-3" data-bs-dismiss="modal"></button>
+        <div class="modal-body">
+           <div class="info-modal-icon bg-success"><i class="bi bi-journal-text"></i></div>
+           <h4 class="info-modal-title">วิธีการใช้งาน</h4>
+           <ul class="info-list">
+             <li><strong>ส่งงาน:</strong> กรอกข้อมูล, เลือกประเภทการขาย, ระบุตำแหน่ง GPS, ถ่ายรูปหลักฐาน และกดบันทึก</li>
+             <li><strong>ดูประวัติ:</strong> กดเมนู "ประวัติ" เพื่อดูรายการย้อนหลัง เลือกเดือน/ปี เพื่อดูสรุปผล</li>
+             <li><strong>GPS:</strong> ระบบต้องการพิกัด GPS เพื่อยืนยันสถานที่ กรุณากด "อนุญาต"</li>
+           </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="privacyModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border-radius: 20px; padding: 20px;">
+        <button type="button" class="btn-close position-absolute end-0 top-0 m-3" data-bs-dismiss="modal"></button>
+        <div class="modal-body">
+           <div class="info-modal-icon bg-secondary"><i class="bi bi-shield-lock"></i></div>
+           <h4 class="info-modal-title">นโยบายความเป็นส่วนตัว</h4>
+           <p class="mb-3 text-center">ระบบนี้จะเก็บข้อมูลของคุณดังนี้:</p>
+           <ul class="info-list">
+             <li>ชื่อ-นามสกุล และ รหัสผู้ใช้สิทธิ์</li>
+             <li>ตำแหน่ง GPS ขณะส่งงาน</li>
+             <li>รูปภาพหลักฐานการขาย</li>
+           </ul>
+           <p class="small text-muted mt-3 text-center">
+             <strong>วัตถุประสงค์:</strong> เพื่อตรวจสอบการใช้สิทธิ์สัมปทาน<br>
+             <strong>การรักษาความปลอดภัย:</strong> ข้อมูลจะถูกเก็บรักษาอย่างปลอดภัยและเข้าถึงได้เฉพาะเจ้าหน้าที่ที่เกี่ยวข้อง
+           </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="container mt-5 mb-3 app-header text-center">
+      <h1>HR Paper Mill</h1>
+      <h5>โครงการใช้สิทธิ์สัมปทานผู้พิการตามมาตรา 35 ประจำปี 2569</h5>
+      <p class="mt-2">เว็บไซต์ HR Paper Mill v.26 (GitHub Pages)</p>
     </div>
 
-    <div class="modal fade" id="rulesModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 20px;">
-                <div class="modal-header bg-warning bg-opacity-10"
-                    style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
-                    <h5 class="modal-title text-dark fw-bold" style="font-size: 1.1rem;"><i
-                            class="bi bi-exclamation-triangle-fill text-warning me-2"></i> ข้อปฏิบัติในการใช้สิทธิ์มาตรา
-                        35</h5>
-                </div>
-                <div class="modal-body rules-content p-4">
-                    <h6 class="fw-bold mb-3">ประเภทการจัดสถานที่จำหน่ายสินค้าหรือบริการ</h6>
-                    <ol>
-                        <li>ผู้ใช้สิทธิ์ ต้องส่งข้อมูลเข้าห้องรายงาน ใน Application WIX... (รายละเอียดเต็ม)
-                            <ul>
-                                <li>1.1 ต้องถ่ายรูปให้เห็นบัตรประจำร้านค้าผู้พิการ ล็อคที่ขาย และผู้ที่ขาย</li>
-                                <li>1.2 หากวันไหนไม่มาขาย ต้องแจ้งเหตุผลของการหยุดขาย และแจ้งกำหนดว่าจะหยุดขายกี่วัน
-                                </li>
-                                <li>1.3 หากวันไหนให้ผู้อื่นเข้ามาขาย แจ้งเหตุผลของ และแจ้งว่าเป็นใครเข้ามาขายทดแทน</li>
-                            </ul>
-                        </li>
-                        <li>หากผู้พิการ เสียชีวิตลง... <strong>หากไม่ปฏิบัติตามผู้ดูแลต้องชดใช้...</strong></li>
-                        <li>หากได้ลงนามสัญญา... <strong>หากมีการใช้สิทธิ์ผู้พิการซ้ำซ้อน...</strong></li>
-                        <li>หากต้องการเปลี่ยนประเภทสินค้า... ติดต่อ คุณเต้ หรือ คุณอู๋</li>
-                        <li>ผู้ใช้สิทธิ์ ต้องไม่ให้ผู้อื่นใช้สถานที่แทน... <strong>หากไม่ปฏิบัติตาม...</strong></li>
-                        <li>ผู้ใช้สิทธิ์ต้องประกอบกิจการใดๆ ที่ไม่ผิดกฎหมาย... <strong>หากไม่ปฏิบัติตาม...</strong></li>
-                    </ol>
-                </div>
-                <div class="modal-footer border-0 pt-0 pb-4 px-4">
-                    <button type="button" class="btn btn-primary w-100 rounded-pill py-2 fw-bold"
-                        data-bs-dismiss="modal">รับทราบและดำเนินการต่อ</button>
-                </div>
-            </div>
+    <div id="loginView" class="container">
+      <div class="card main-card">
+        <div class="text-center mb-4"><h4 class="fw-bold text-primary">ส่วนที่ 1: เข้าสู่ระบบ</h4></div>
+        <div class="mb-4">
+          <label for="loginId" class="form-label text-center w-100 mb-3">กรอกรหัสผู้ใช้สิทธิ์ <span class="required-star">*</span></label>
+          <input type="text" id="loginId" class="form-control form-control-rounded text-center text-uppercase" style="font-size: 1.2rem; letter-spacing: 2px;" maxlength="6" placeholder="XXXXXX">
         </div>
+        <button onclick="manualLogin()" class="btn btn-primary w-100 rounded-pill py-3 fw-bold">ตรวจสอบข้อมูล</button>
+        <div class="text-center mt-3">
+           <small class="text-muted cursor-pointer text-decoration-underline" onclick="showRulesModal()">อ่านข้อปฏิบัติการใช้สิทธิ์</small>
+        </div>
+      </div>
     </div>
 
-    <div class="modal fade" id="aboutModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 20px; padding: 20px;">
-                <button type="button" class="btn-close position-absolute end-0 top-0 m-3"
-                    data-bs-dismiss="modal"></button>
-                <div class="modal-body text-center">
-                    <div class="info-modal-icon bg-primary"><i class="bi bi-info-circle"></i></div>
-                    <h4 class="info-modal-title">เกี่ยวกับระบบ</h4>
-                    <p>ระบบ HR Paper Mill
-                        พัฒนาขึ้นเพื่ออำนวยความสะดวกในการส่งหลักฐานการขายและติดตามผลการดำเนินงานของผู้ใช้สิทธิ์ตามมาตรา
-                        35</p>
-                    <p class="text-muted small mt-3">Version 2.6 (2026)</p>
+    <div id="appContainer" class="hidden">
+      
+      <div id="formView" class="container">
+        <div class="card main-card mb-4">
+           <h5 class="text-center fw-bold mb-4">ข้อมูลของฉัน</h5>
+           <div class="profile-section">
+             <img id="formProfilePic" src="" class="profile-img-center" alt="Profile">
+             <div class="profile-row"><span class="profile-label">ชื่อ-สกุล:</span><span class="profile-value" id="formName">...</span></div>
+             <div class="profile-row"><span class="profile-label">รหัสผู้ใช้สิทธิ์:</span><span class="profile-value" id="formId">...</span></div>
+             <div class="profile-row"><span class="profile-label">การใช้สิทธิ์:</span><span class="profile-value" id="formStatus">...</span></div>
+             <p class="info-note">กรุณาตรวจสอบข้อมูลของท่านให้เรียบร้อย ก่อนดำเนินการในส่วนถัดไป</p>
+           </div>
+        </div>
+
+        <div class="card main-card">
+          <h5 class="fw-bold text-primary mb-4">ส่วนที่ 2: ส่งหลักฐานการขาย</h5>
+          <form id="salesForm" onsubmit="handleFormSubmit(event)">
+            <input type="hidden" id="userId"><input type="hidden" id="userName">
+            <input type="hidden" id="lat" name="lat"><input type="hidden" id="long" name="long">
+            
+            <div class="mb-3">
+               <label class="form-label text-muted small ms-2 mb-1">ชื่อผู้ใช้สิทธิ์</label>
+               <input type="text" id="displayUserName" class="form-control form-control-rounded bg-white border-0 ps-3 fw-bold text-primary shadow-sm" disabled value="...">
+            </div>
+
+            <div class="row g-3 mb-3">
+               <div class="col-12 col-md-6">
+                 <label class="form-label text-muted small ms-2 mb-1">วันที่ปัจจุบัน</label>
+                 <div class="input-group">
+                   <span class="input-group-text bg-white border-end-0 text-primary ps-3" style="border-radius: 50px 0 0 50px;"><i class="bi bi-calendar-event"></i></span>
+                   <input type="text" id="currentDate" class="form-control form-control-rounded border-start-0 bg-white ps-0" disabled style="border-radius: 0 50px 50px 0;">
+                 </div>
+               </div>
+               <div class="col-12 col-md-6">
+                  <label class="form-label text-muted small ms-2 mb-1">เวลาปัจจุบัน</label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0 text-primary ps-3" style="border-radius: 50px 0 0 50px;"><i class="bi bi-clock"></i></span>
+                    <input type="text" id="currentTime" class="form-control form-control-rounded border-start-0 bg-white ps-0" disabled style="border-radius: 0 50px 50px 0;">
+                  </div>
+               </div>
+             </div>
+
+            <div class="location-card">
+                <div class="loc-title"><i class="bi bi-geo-alt-fill loc-icon"></i> ตำแหน่งของคุณ</div>
+                <div id="locationStatus" class="mb-2" style="font-size: 1rem; color: #555;">กำลังระบุพิกัด...</div>
+                <button type="button" class="btn-refresh" onclick="getLocation()"><i class="bi bi-arrow-clockwise"></i> รีเฟรชตำแหน่ง</button>
+                <div class="gps-note">
+                   <div class="d-flex align-items-start">
+                      <i class="bi bi-info-circle-fill me-2 mt-1" style="font-size: 1.1rem;"></i>
+                      <div><strong>หมายเหตุ:</strong><br>ระบบจะบันทึกตำแหน่ง GPS ของคุณโดยอัตโนมัติ เพื่อยืนยันสถานที่จำหน่ายสินค้า</div>
+                   </div>
                 </div>
             </div>
+
+            <div class="mb-4 mt-4">
+              <label class="form-label">ประเภทการขาย <span class="required-star">*</span></label>
+              <div class="d-flex flex-column ps-3 gap-2">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="salesTypeRadio" id="saleSelf" value="ทำการขายด้วยตัวเอง" checked>
+                  <label class="form-check-label" for="saleSelf">ทำการขายด้วยตัวเอง</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="salesTypeRadio" id="saleAgent" value="ทำการขายโดยตัวแทน">
+                  <label class="form-check-label" for="saleAgent">ทำการขายโดยตัวแทน</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-5">
+              <label class="form-label">ถ่ายภาพหลักฐาน <span class="required-star">*</span></label>
+              <input type="file" id="evidenceImg" class="hidden" accept="image/*" capture="environment" onchange="updateFileName(this)">
+              <label for="evidenceImg" class="btn-upload" id="uploadBtnLabel"><i class="bi bi-camera-fill me-2"></i> ถ่ายภาพ / เลือกรูป</label>
+               <div class="form-text text-muted small ps-3 mt-2" id="fileNameDisplay">Max: 2 MB</div>
+            </div>
+
+            <button type="submit" class="btn btn-submit-gray w-100 py-3">
+              <i class="bi bi-rocket-takeoff-fill me-2"></i> บันทึกข้อมูล
+            </button>
+          </form>
+
+          <div class="accordion accordion-flush mt-4 pt-3 border-top" id="accordionRulesForm">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingForm">
+                <button class="accordion-button collapsed text-muted" type="button" data-bs-toggle="collapse" data-bs-target="#collapseForm">
+                  <small><i class="bi bi-info-circle me-2"></i> ทบทวนข้อปฏิบัติการใช้สิทธิ์</small>
+                </button>
+              </h2>
+              <div id="collapseForm" class="accordion-collapse collapse" data-bs-parent="#accordionRulesForm">
+                <div class="accordion-body rules-content bg-light rounded mt-2 text-start">
+                   <h6 class="fw-bold mb-3">ประเภทการจัดสถานที่จำหน่ายสินค้าหรือบริการ</h6>
+                   <ol class="ps-3 mb-0">
+                     <li>ผู้ใช้สิทธิ์ ต้องส่งข้อมูล... (รายละเอียดเต็ม)</li>
+                     </ol>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div id="historyView" class="hidden container">
+        <div class="card main-card mb-4">
+           <h5 class="text-center fw-bold mb-4">ข้อมูลของฉัน</h5>
+           <div class="profile-section">
+             <img id="histProfilePic" src="" class="profile-img-center" alt="Profile">
+             <div class="profile-row"><span class="profile-label">ชื่อ-สกุล:</span><span class="profile-value" id="histName">...</span></div>
+             <div class="profile-row"><span class="profile-label">รหัสผู้ใช้สิทธิ์:</span><span class="profile-value" id="histId">...</span></div>
+             <div class="profile-row"><span class="profile-label">การใช้สิทธิ์:</span><span class="profile-value" id="histStatus">...</span></div>
+           </div>
+        </div>
+
+        <div class="d-flex justify-content-center gap-2 mb-3 filter-btn-group">
+          <button onclick="changeFilter('week')" id="btnWeek" class="btn btn-outline-primary active">รายสัปดาห์</button>
+          <button onclick="changeFilter('month')" id="btnMonth" class="btn btn-outline-primary">รายเดือน</button>
+          <button onclick="changeFilter('year')" id="btnYear" class="btn btn-outline-primary">รายปี</button>
+        </div>
+
+        <div id="dashboardSummary" class="dashboard-box">
+           <div class="dash-title">กำลังโหลด...</div>
+        </div>
+
+        <div class="accordion accordion-flush mb-4" id="historyAccordion"></div>
+        <button id="loadMoreBtn" class="btn btn-light w-100 mb-4 text-muted hidden" onclick="loadMoreItems()">โหลดเพิ่มเติม <i class="bi bi-chevron-down"></i></button>
+        <button onclick="logout()" class="btn btn-danger w-100 rounded-pill py-3 mb-4 fw-bold">ออกจากระบบ</button>
+      </div>
+
+      <div class="bottom-nav">
+        <div class="nav-item active" id="navForm" onclick="switchTab('form')">
+          <i class="bi bi-plus-circle-fill nav-icon"></i><span>ส่งงาน</span>
+        </div>
+        <div class="nav-item" id="navHistory" onclick="switchTab('history')">
+          <i class="bi bi-clock-history nav-icon"></i><span>ประวัติ</span>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="howtoModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 20px; padding: 20px;">
-                <button type="button" class="btn-close position-absolute end-0 top-0 m-3"
-                    data-bs-dismiss="modal"></button>
-                <div class="modal-body">
-                    <div class="info-modal-icon bg-success"><i class="bi bi-journal-text"></i></div>
-                    <h4 class="info-modal-title">วิธีการใช้งาน</h4>
-                    <ul class="info-list">
-                        <li><strong>ส่งงาน:</strong> กรอกข้อมูล, เลือกประเภทการขาย, ระบุตำแหน่ง GPS, ถ่ายรูปหลักฐาน
-                            และกดบันทึก</li>
-                        <li><strong>ดูประวัติ:</strong> กดเมนู "ประวัติ" เพื่อดูรายการย้อนหลัง เลือกเดือน/ปี
-                            เพื่อดูสรุปผล</li>
-                        <li><strong>GPS:</strong> ระบบต้องการพิกัด GPS เพื่อยืนยันสถานที่ กรุณากด "อนุญาต"</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+  <footer class="footer" id="mainFooter">
+    <div class="container text-center">
+      <div class="footer-logo">H</div>
+      <ul class="footer-links">
+        <li><a onclick="showModal('aboutModal')">เกี่ยวกับระบบ</a></li>
+        <li>|</li>
+        <li><a onclick="showModal('howtoModal')">วิธีการใช้งาน</a></li>
+        <li>|</li>
+        <li><a onclick="showModal('privacyModal')">นโยบายความเป็นส่วนตัว</a></li>
+      </ul>
+      <p class="copyright">© 2026 TUBE™ Creative Group. All right reserved.</p>
     </div>
+  </footer>
 
-    <div class="modal fade" id="privacyModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 20px; padding: 20px;">
-                <button type="button" class="btn-close position-absolute end-0 top-0 m-3"
-                    data-bs-dismiss="modal"></button>
-                <div class="modal-body">
-                    <div class="info-modal-icon bg-secondary"><i class="bi bi-shield-lock"></i></div>
-                    <h4 class="info-modal-title">นโยบายความเป็นส่วนตัว</h4>
-                    <p class="mb-3 text-center">ระบบนี้จะเก็บข้อมูลของคุณดังนี้:</p>
-                    <ul class="info-list">
-                        <li>ชื่อ-นามสกุล และ รหัสผู้ใช้สิทธิ์</li>
-                        <li>ตำแหน่ง GPS ขณะส่งงาน</li>
-                        <li>รูปภาพหลักฐานการขาย</li>
-                    </ul>
-                    <p class="small text-muted mt-3 text-center">
-                        <strong>วัตถุประสงค์:</strong> เพื่อตรวจสอบการใช้สิทธิ์สัมปทาน<br>
-                        <strong>การรักษาความปลอดภัย:</strong>
-                        ข้อมูลจะถูกเก็บรักษาอย่างปลอดภัยและเข้าถึงได้เฉพาะเจ้าหน้าที่ที่เกี่ยวข้อง
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="content-wrapper">
-        <div class="container mt-5 mb-3 app-header text-center">
-            <h1>HR Paper Mill</h1>
-            <h5>โครงการใช้สิทธิ์สัมปทานผู้พิการตามมาตรา 35 ประจำปี 2569</h5>
-            <p class="mt-2">เว็บไซต์ HR Paper Mill v.26 (GitHub Pages)</p>
-        </div>
-
-        <div id="loginView" class="container">
-            <div class="card main-card">
-                <div class="text-center mb-4">
-                    <h4 class="fw-bold text-primary">ส่วนที่ 1: เข้าสู่ระบบ</h4>
-                </div>
-                <div class="mb-4">
-                    <label for="loginId" class="form-label text-center w-100 mb-3">กรอกรหัสผู้ใช้สิทธิ์ <span
-                            class="required-star">*</span></label>
-                    <input type="text" id="loginId" class="form-control form-control-rounded text-center text-uppercase"
-                        style="font-size: 1.2rem; letter-spacing: 2px;" maxlength="6" placeholder="XXXXXX">
-                </div>
-                <button onclick="manualLogin()"
-                    class="btn btn-primary w-100 rounded-pill py-3 fw-bold">ตรวจสอบข้อมูล</button>
-                <div class="text-center mt-3">
-                    <small class="text-muted cursor-pointer text-decoration-underline"
-                        onclick="showRulesModal()">อ่านข้อปฏิบัติการใช้สิทธิ์</small>
-                </div>
-            </div>
-        </div>
-
-        <div id="appContainer" class="hidden">
-
-            <div id="formView" class="container">
-                <div class="card main-card mb-4">
-                    <h5 class="text-center fw-bold mb-4">ข้อมูลของฉัน</h5>
-                    <div class="profile-section">
-                        <img id="formProfilePic" src="" class="profile-img-center" alt="Profile">
-                        <div class="profile-row"><span class="profile-label">ชื่อ-สกุล:</span><span
-                                class="profile-value" id="formName">...</span></div>
-                        <div class="profile-row"><span class="profile-label">รหัสผู้ใช้สิทธิ์:</span><span
-                                class="profile-value" id="formId">...</span></div>
-                        <div class="profile-row"><span class="profile-label">การใช้สิทธิ์:</span><span
-                                class="profile-value" id="formStatus">...</span></div>
-                        <p class="info-note">กรุณาตรวจสอบข้อมูลของท่านให้เรียบร้อย ก่อนดำเนินการในส่วนถัดไป</p>
-                    </div>
-                </div>
-
-                <div class="card main-card">
-                    <h5 class="fw-bold text-primary mb-4">ส่วนที่ 2: ส่งหลักฐานการขาย</h5>
-                    <form id="salesForm" onsubmit="handleFormSubmit(event)">
-                        <input type="hidden" id="userId"><input type="hidden" id="userName">
-                        <input type="hidden" id="lat" name="lat"><input type="hidden" id="long" name="long">
-
-                        <div class="mb-3">
-                            <label class="form-label text-muted small ms-2 mb-1">ชื่อผู้ใช้สิทธิ์</label>
-                            <input type="text" id="displayUserName"
-                                class="form-control form-control-rounded bg-white border-0 ps-3 fw-bold text-primary shadow-sm"
-                                disabled value="...">
-                        </div>
-
-                        <div class="row g-3 mb-3">
-                            <div class="col-12 col-md-6">
-                                <label class="form-label text-muted small ms-2 mb-1">วันที่ปัจจุบัน</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-white border-end-0 text-primary ps-3"
-                                        style="border-radius: 50px 0 0 50px;"><i
-                                            class="bi bi-calendar-event"></i></span>
-                                    <input type="text" id="currentDate"
-                                        class="form-control form-control-rounded border-start-0 bg-white ps-0" disabled
-                                        style="border-radius: 0 50px 50px 0;">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <label class="form-label text-muted small ms-2 mb-1">เวลาปัจจุบัน</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-white border-end-0 text-primary ps-3"
-                                        style="border-radius: 50px 0 0 50px;"><i class="bi bi-clock"></i></span>
-                                    <input type="text" id="currentTime"
-                                        class="form-control form-control-rounded border-start-0 bg-white ps-0" disabled
-                                        style="border-radius: 0 50px 50px 0;">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="location-card">
-                            <div class="loc-title"><i class="bi bi-geo-alt-fill loc-icon"></i> ตำแหน่งของคุณ</div>
-                            <div id="locationStatus" class="mb-2" style="font-size: 1rem; color: #555;">
-                                กำลังระบุพิกัด...</div>
-                            <button type="button" class="btn-refresh" onclick="getLocation()"><i
-                                    class="bi bi-arrow-clockwise"></i> รีเฟรชตำแหน่ง</button>
-                            <div class="gps-note">
-                                <div class="d-flex align-items-start">
-                                    <i class="bi bi-info-circle-fill me-2 mt-1" style="font-size: 1.1rem;"></i>
-                                    <div><strong>หมายเหตุ:</strong><br>ระบบจะบันทึกตำแหน่ง GPS ของคุณโดยอัตโนมัติ
-                                        เพื่อยืนยันสถานที่จำหน่ายสินค้า</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-4 mt-4">
-                            <label class="form-label">ประเภทการขาย <span class="required-star">*</span></label>
-                            <div class="d-flex flex-column ps-3 gap-2">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="salesTypeRadio" id="saleSelf"
-                                        value="ทำการขายด้วยตัวเอง" checked>
-                                    <label class="form-check-label" for="saleSelf">ทำการขายด้วยตัวเอง</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="salesTypeRadio" id="saleAgent"
-                                        value="ทำการขายโดยตัวแทน">
-                                    <label class="form-check-label" for="saleAgent">ทำการขายโดยตัวแทน</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-5">
-                            <label class="form-label">ถ่ายภาพหลักฐาน <span class="required-star">*</span></label>
-                            <input type="file" id="evidenceImg" class="hidden" accept="image/*" capture="environment"
-                                onchange="updateFileName(this)">
-                            <label for="evidenceImg" class="btn-upload" id="uploadBtnLabel"><i
-                                    class="bi bi-camera-fill me-2"></i> ถ่ายภาพ / เลือกรูป</label>
-                            <div class="form-text text-muted small ps-3 mt-2" id="fileNameDisplay">Max: 2 MB</div>
-                        </div>
-
-                        <button type="submit" class="btn btn-submit-gray w-100 py-3">
-                            <i class="bi bi-rocket-takeoff-fill me-2"></i> บันทึกข้อมูล
-                        </button>
-                    </form>
-
-                    <div class="accordion accordion-flush mt-4 pt-3 border-top" id="accordionRulesForm">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingForm">
-                                <button class="accordion-button collapsed text-muted" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseForm">
-                                    <small><i class="bi bi-info-circle me-2"></i> ทบทวนข้อปฏิบัติการใช้สิทธิ์</small>
-                                </button>
-                            </h2>
-                            <div id="collapseForm" class="accordion-collapse collapse"
-                                data-bs-parent="#accordionRulesForm">
-                                <div class="accordion-body rules-content bg-light rounded mt-2 text-start">
-                                    <h6 class="fw-bold mb-3">ประเภทการจัดสถานที่จำหน่ายสินค้าหรือบริการ</h6>
-                                    <ol class="ps-3 mb-0">
-                                        <li>ผู้ใช้สิทธิ์ ต้องส่งข้อมูล... (รายละเอียดเต็ม)</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="historyView" class="hidden container">
-                <div class="card main-card mb-4">
-                    <h5 class="text-center fw-bold mb-4">ข้อมูลของฉัน</h5>
-                    <div class="profile-section">
-                        <img id="histProfilePic" src="" class="profile-img-center" alt="Profile">
-                        <div class="profile-row"><span class="profile-label">ชื่อ-สกุล:</span><span
-                                class="profile-value" id="histName">...</span></div>
-                        <div class="profile-row"><span class="profile-label">รหัสผู้ใช้สิทธิ์:</span><span
-                                class="profile-value" id="histId">...</span></div>
-                        <div class="profile-row"><span class="profile-label">การใช้สิทธิ์:</span><span
-                                class="profile-value" id="histStatus">...</span></div>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-center gap-2 mb-3 filter-btn-group">
-                    <button onclick="changeFilter('week')" id="btnWeek"
-                        class="btn btn-outline-primary active">รายสัปดาห์</button>
-                    <button onclick="changeFilter('month')" id="btnMonth"
-                        class="btn btn-outline-primary">รายเดือน</button>
-                    <button onclick="changeFilter('year')" id="btnYear" class="btn btn-outline-primary">รายปี</button>
-                </div>
-
-                <div id="dashboardSummary" class="dashboard-box">
-                    <div class="dash-title">กำลังโหลด...</div>
-                </div>
-
-                <div class="accordion accordion-flush mb-4" id="historyAccordion"></div>
-                <button id="loadMoreBtn" class="btn btn-light w-100 mb-4 text-muted hidden"
-                    onclick="loadMoreItems()">โหลดเพิ่มเติม <i class="bi bi-chevron-down"></i></button>
-                <button onclick="logout()"
-                    class="btn btn-danger w-100 rounded-pill py-3 mb-4 fw-bold">ออกจากระบบ</button>
-            </div>
-
-            <div class="bottom-nav">
-                <div class="nav-item active" id="navForm" onclick="switchTab('form')">
-                    <i class="bi bi-plus-circle-fill nav-icon"></i><span>ส่งงาน</span>
-                </div>
-                <div class="nav-item" id="navHistory" onclick="switchTab('history')">
-                    <i class="bi bi-clock-history nav-icon"></i><span>ประวัติ</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer" id="mainFooter">
-        <div class="container text-center">
-            <div class="footer-logo">H</div>
-            <ul class="footer-links">
-                <li><a onclick="showModal('aboutModal')">เกี่ยวกับระบบ</a></li>
-                <li>|</li>
-                <li><a onclick="showModal('howtoModal')">วิธีการใช้งาน</a></li>
-                <li>|</li>
-                <li><a onclick="showModal('privacyModal')">นโยบายความเป็นส่วนตัว</a></li>
-            </ul>
-            <p class="copyright">© 2026 TUBE™ Creative Group. All right reserved.</p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script src="js/config.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
 </body>
-
 </html>
